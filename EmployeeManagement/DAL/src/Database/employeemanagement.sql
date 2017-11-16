@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 15, 2017 lúc 01:59 PM
+-- Thời gian đã tạo: Th10 16, 2017 lúc 06:53 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 5.6.32
 
@@ -114,8 +114,10 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MANHANVIEN`, `HOTEN`, `GIOITINH`, `NGAYSINH`, `CMND`, `DIACHI`, `QUEQUAN`, `SOTAIKHOAN`, `SODIENTHOAI`, `NGAYVAOLAM`, `ISDELETE`, `GHICHU`, `MAPHONGBAN`, `MACHUCVU`, `BACLUONG`) VALUES
-('NV000005', 'Le Van Luyen', 1, '15/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV002', 4),
-('NV000006', 'Nguyen Van Tai', 1, '15/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV006', 2);
+('NV000005', 'Nguyên Phạm Hoài', 1, '17/10/1996', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV002', 4),
+('NV000006', 'Nguyen Van Tai', 1, '15/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV006', 2),
+('NV000007', 'Nguyen Van B', 1, '16/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '16/11/2017', 0, '', 'PB002', 'CV001', 3),
+('NV000008', 'Tran Van C', 0, '16/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '16/11/2017', 0, '', 'PB005', 'CV007', 2);
 
 -- --------------------------------------------------------
 

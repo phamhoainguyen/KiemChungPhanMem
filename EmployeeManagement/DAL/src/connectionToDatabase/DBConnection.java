@@ -77,7 +77,7 @@ public class DBConnection {
 
     }
     
-    public ResultSet getResultSet(String _queryString, String arrPara[], int arrType[]) throws SQLException, ClassNotFoundException{
+    public ArrayList getResultSet(String _queryString, String arrPara[], int arrType[]) throws SQLException, ClassNotFoundException{
         try{
             this.openConnection();
             
@@ -100,7 +100,22 @@ public class DBConnection {
             }
             
             ResultSet rs = preStatement.executeQuery();
-            return rs;
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            if(rs!= null){
+                ArrayList<String[]> list = new ArrayList<>();
+                while(rs.next()){
+                    String arr[] = new String[columnsNumber];
+                    for(int i = 0; i < columnsNumber; i ++){
+                        
+                        arr[i] = rs.getString(i + 1);
+                    }
+                    
+                    list.add(arr);
+                }
+                return list;
+            }
+            return null;
         } catch(SQLException e){
             throw e;
         } finally{
@@ -132,7 +147,7 @@ public class DBConnection {
                     preStatement.setInt(i + 1, Integer.parseInt(arrPara[i]));
                 }
                 else{
-                    preStatement.setString(i + 1, arrPara[i].toString());
+                    preStatement.setString(i + 1, arrPara[i]);
                 }
             }
             
