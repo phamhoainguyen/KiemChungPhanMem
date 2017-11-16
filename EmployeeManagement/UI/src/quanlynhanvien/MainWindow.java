@@ -125,27 +125,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItemThietLapGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemThietLapGiaActionPerformed
         // TODO add your handling code here:
-        this.veLaiFrame(new ThietLapGia());
+        
     }//GEN-LAST:event_jMenuItemThietLapGiaActionPerformed
 
     private void jMenuTongQuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTongQuanActionPerformed
         
-        // TODO add your handling code here:
-        System.out.println("You clicked the JMenu");
-        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+
         
         
     }//GEN-LAST:event_jMenuTongQuanActionPerformed
 
     private void jMenuItemTinhLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTinhLuongActionPerformed
         // TODO add your handling code here:
-        
-        this.veLaiFrame(new TongQuan());
+       UIFrameTinhLuong tinhLuong = new UIFrameTinhLuong(null);
+       
+       tinhLuong.setVisible(true);
     }//GEN-LAST:event_jMenuItemTinhLuongActionPerformed
 
     private void jMenuItemDanhSachNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDanhSachNhanVienActionPerformed
         // TODO add your handling code here:
-        
+        this.veLaiFrame(new UIPanelNhanVien());
     }//GEN-LAST:event_jMenuItemDanhSachNhanVienActionPerformed
 
     /**
@@ -198,7 +197,6 @@ public class MainWindow extends javax.swing.JFrame {
     
 
     
-    private TongQuan jPanelTongQuan;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuBaoCao;
     private javax.swing.JMenuBar jMenuBar;

@@ -570,19 +570,22 @@ layout.setHorizontalGroup(
             nhanVien.setTenNhanVien(this.jTextFieldHoTen.getText());
             nhanVien.setGioiTinh(String.valueOf(this.getGioiTinh()));
 
-            if(this.daoNhanVien == null){
-                int status = this.bllNhanVien.insertNhanVien(nhanVien);
-                if(status != 0){
-                    this.dispose();
-                    JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công!!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            if(this.checkValidate(nhanVien)){
+                if(this.daoNhanVien == null){
+                    int status = this.bllNhanVien.insertNhanVien(nhanVien);
+                    if(status != 0){
+                        this.dispose();
+                        JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công!!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-            }
-            else{
-                int status = this.bllNhanVien.updateNhanVien(nhanVien);
-                if(status != 0){
-                    this.dispose();
-                    JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                else{
+                    int status = this.bllNhanVien.updateNhanVien(nhanVien);
+                    if(status != 0){
+                        this.dispose();
+                        JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
+                
             }
 
         }catch(Exception ex){
@@ -622,6 +625,21 @@ layout.setHorizontalGroup(
         return -1;
     }
     
+    
+    // check Validate
+    private boolean checkValidate(DAONhanVien nv){
+        try{
+            if(nv.getGioiTinh().isEmpty() || nv.getMaChucVu().isEmpty() 
+                    || nv.getMaPhongBan().isEmpty() || nv.getSoCMND().isEmpty()
+                    || nv.getTenNhanVien().isEmpty() || nv.getBacLuong().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Chưa nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            return true;
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
 
     /**
      * @param args the command line arguments
