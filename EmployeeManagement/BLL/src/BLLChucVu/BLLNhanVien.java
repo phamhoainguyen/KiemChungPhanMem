@@ -117,4 +117,37 @@ public class BLLNhanVien {
             throw ex;
         }
     }
+    
+    
+    public ArrayList<DAONhanVien> getNhanVienBySearchKey(String _searchKey) throws Exception{
+        try{
+            ArrayList<String[]> al = this.nhanVien.getNhanVienByWord(_searchKey);
+            ArrayList<DAONhanVien> alNhanVien = new ArrayList<>();
+            for(String[] ele:al){
+                DAONhanVien nhanVien = new DAONhanVien();
+                nhanVien.setMaNhanVien(ele[0]);
+                nhanVien.setTenNhanVien(ele[1]);
+                nhanVien.setGioiTinh(ele[2]);
+                nhanVien.setNgaySinh(ele[3]);
+                nhanVien.setSoCMND(ele[4]);
+                nhanVien.setDiaChi(ele[5]);
+                nhanVien.setQueQuan(ele[6]);
+                nhanVien.setSoTaiKhoan(ele[7]);
+                nhanVien.setSoDienThoai(ele[8]);
+                nhanVien.setNgayVaoLam(ele[9]);
+                nhanVien.setGhiChu(ele[11]);
+                nhanVien.setMaPhongBan(ele[12]);
+                nhanVien.setMaChucVu(ele[13]);
+                nhanVien.setTenChucVu(ele[16]);
+                nhanVien.setBacLuong(ele[14]);
+                nhanVien.setTenPhongBan(ele[18]);
+
+                alNhanVien.add(nhanVien);
+            }
+            return alNhanVien;
+        }catch(ClassNotFoundException | SQLException ex){
+            throw ex;
+        }
+    }
+    
 }
