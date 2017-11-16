@@ -92,9 +92,9 @@ public class DALNhanVien {
     // cap nhat thong tin nhan vien vao csdl
     public int updateNhanVien(DAONhanVien _nhanVien) throws Exception{
         try{
-            String query = "UPDATE `nhanvien` SET `HOTEN`=?, `GIOITINH`=?, `NGAYSINH`?, `CMND`=?,"
-                    + " `DIACHI=?`, `QUEQUAN`=?, `SOTAIKHOAN`=?, `SODIENTHOAI`=?, "
-                    + "`NGAYVAOLAM`=?, `GHICHU`=?, `MAPHONGBAN`=?, `MACHUCVU`=?, `BACLUONG`=? WHERE `MANHANVIEN`=? ";
+            String query = "UPDATE `nhanvien` SET `HOTEN`=?, `GIOITINH`=?, `NGAYSINH`=?, `CMND`=?,"
+                    + " `DIACHI`=?, `QUEQUAN`=?, `SOTAIKHOAN`=?, `SODIENTHOAI`=?, "
+                    + "`NGAYVAOLAM`=?, `GHICHU`=?, `MAPHONGBAN`=?, `MACHUCVU`=?, `BACLUONG`=? WHERE `MANHANVIEN`=?";
             
             String[] arrPara = {  _nhanVien.getTenNhanVien(), _nhanVien.getGioiTinh(),
                 _nhanVien.getNgaySinh(), _nhanVien.getSoCMND(), _nhanVien.getDiaChi(),
