@@ -10,6 +10,8 @@ import dataOjects.DAONhanVien;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -111,4 +113,35 @@ public class DALNhanVien {
             throw e;
         }
     }
+    
+    // lay nhan vien tu ma nhan vien bagn toan tu like
+    public ArrayList getNhanVienByWord(String _searchKey) throws SQLException, ClassNotFoundException{
+        try{
+            String query = "SELECT * FROM nhanvien n INNER JOIN chucvu c ON n.MACHUCVU=c.MACHUCVU\n" +
+"INNER JOIN phongban p ON n.MAPHONGBAN=p.MAPHONGBAN  WHERE n.`MANHANVIEN` LIKE ? OR n.`HOTEN` LIKE ? OR p.TENPHONGBAN LIKE ? OR c.TENCHUCVU LIKE ? OR n.MAPHONGBAN LIKE ? OR n.MACHUCVU LIKE ?";
+            
+            String sqlQuery = "%" + _searchKey + "%";
+            String[] arrPara = {sqlQuery, sqlQuery, sqlQuery, sqlQuery, sqlQuery, sqlQuery};
+            int[] arrTypes = {Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
+            ArrayList al = this.cnn.cnn.getResultSet(query, arrPara, arrTypes);
+            return al;
+        } catch(SQLException e){
+        throw e;
+        }
+    }
+    
+    
+//        public static void main(String[] args){
+//            DALNhanVien dalNV = new DALNhanVien();
+//        try {
+//            ArrayList al = dalNV.getNhanVienByWord("Nhan su");
+//            int i =6;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DALNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DALNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }
+
+//SELECT * FROM `nhanvien` WHERE `MANHANVIEN` LIKE '%0000%' OR `HOTEN` LIKE '%Tran%'
