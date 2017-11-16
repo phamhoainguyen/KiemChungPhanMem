@@ -24,13 +24,25 @@ public class DALLamViec {
     }
     public ArrayList getAllThang(String _maNhanVien) throws SQLException, ClassNotFoundException{
         try{
-            String query = "SELECT DISTINCT THANG FROM `lamviec` WHERE lamviec.MANHANVIEN=? ORDER BY ASC";
+            String query = "SELECT DISTINCT THANG FROM `lamviec` WHERE lamviec.MANHANVIEN=? ORDER BY lamviec.THANG ASC";
             String[] arrPara = {_maNhanVien};
             int[] arrTypes = {Types.VARCHAR};
             ArrayList al = this.cnn.cnn.getResultSet(query, arrPara, arrTypes);
             return al;
         } catch(SQLException e){
         throw e;
+        }
+    }
+    
+    public ArrayList getThongTinChiTiet(String _maNhanVien, String _thang) throws Exception{
+        try{
+            String query = "SELECT nv.MANHANVIEN, nv.HOTEN, pb.TENPHONGBAN, cv.TENCHUCVU, l.LUONGCB, l.HSLUONG, l.HSPC, l.PHUCAP, lv.THANG, lv.SONGAYNGHI, lv.SONGAYDITRE, lv.GHICHU, ((l.LUONGCB * (l.HSLUONG + l.HSPC)) + l.PHUCAP - (500000 * lv.SONGAYNGHI) - (200000*lv.SONGAYDITRE)) AS TONGLUONG FROM nhanvien nv INNER JOIN lamviec lv ON nv.MANHANVIEN=lv.MANHANVIEN INNER JOIN luong l ON nv.BACLUONG=l.BACLUONG INNER JOIN chucvu cv ON cv.MACHUCVU=nv.MACHUCVU INNER JOIN phongban pb ON pb.MAPHONGBAN = nv.MAPHONGBAN WHERE lv.MANHANVIEN=? AND lv.THANG=?";
+            String[] arrPara = {_maNhanVien, _thang};
+            int[] arrTypes = {Types.VARCHAR, Types.INTEGER};
+            ArrayList al = this.cnn.cnn.getResultSet(query, arrPara, arrTypes);
+             return al;
+        }catch(Exception ex){
+            throw ex;
         }
     }
     
