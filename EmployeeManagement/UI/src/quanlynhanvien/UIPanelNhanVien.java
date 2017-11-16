@@ -77,8 +77,9 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButtonThem = new javax.swing.JButton();
         jButtonXoa = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonSua = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButtonRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -182,14 +183,21 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Sửa");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSua.setText("Sửa");
+        jButtonSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonSuaActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Tìm theo mã, tên: ");
+
+        jButtonRefresh.setText("Refesh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,13 +213,15 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addComponent(jButtonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRefresh)
+                        .addGap(3, 3, 3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -224,23 +234,49 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
                     .addComponent(jButtonThem)
                     .addComponent(jLabel1)
                     .addComponent(jButtonXoa)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRefresh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        int rowNum = -1;
+        rowNum = this.jTable1.getSelectedRow();
+        if(rowNum != -1){
+            UIFrameThemNhanVien suaFrame = new UIFrameThemNhanVien(this.layNhanVienDaChon());
+            suaFrame.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhân viên!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonSuaActionPerformed
 
+    
+    // lay nhan vien tu row selected
+    public DAONhanVien layNhanVienDaChon(){
+        
+        try {
+            int rowNum = this.jTable1.getSelectedRow();
+            String selectedMaNhanVien = this.jTable1.getValueAt(rowNum, 0).toString();
+            DAONhanVien nhanVienSelected = this.bllNhanVien.getNhanVienByID(selectedMaNhanVien);
+            return nhanVienSelected;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhân viên!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        return null;
+    }
+    
     private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
         // TODO add your handling code here:
         int rowCount = this.mModel.getRowCount();
         if(rowCount > 0){
             this.xoaRowTrongTable();
         }
-        
+        this.loadLaibang();
         
     }//GEN-LAST:event_jButtonXoaActionPerformed
 
@@ -248,8 +284,22 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
         UIFrameThemNhanVien frame = new UIFrameThemNhanVien(null);
         frame.setVisible(true);
+        
+        this.loadLaibang();
     }//GEN-LAST:event_jButtonThemActionPerformed
 
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+        // TODO add your handling code here:
+        this.loadLaibang();
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    
+    //Load lai bang
+    public void loadLaibang(){
+        this.duaDanhSachNhanVienVaoBang();
+        this.showDanhSachNhanVien();
+    }
+    
     // xóa row trong table
     public void xoaRowTrongTable(){
         try{
@@ -260,16 +310,16 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
             this.mModel.removeRow(rowNum);
             this.mModel.fireTableDataChanged();
         
-        
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhân viên!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JButton jButtonSua;
     private javax.swing.JButton jButtonThem;
     private javax.swing.JButton jButtonXoa;
     private javax.swing.JLabel jLabel1;

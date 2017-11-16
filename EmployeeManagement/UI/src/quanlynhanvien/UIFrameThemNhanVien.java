@@ -11,9 +11,13 @@ import BLLChucVu.BLLNhanVien;
 import BLLChucVu.BLLPhongBan;
 import dataOjects.DAONhanVien;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +43,7 @@ public class UIFrameThemNhanVien extends javax.swing.JFrame {
     // ham khoi tao
     public UIFrameThemNhanVien(DAONhanVien _nhanVien) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.daoNhanVien = _nhanVien;
         
         initMembers();
@@ -46,6 +51,44 @@ public class UIFrameThemNhanVien extends javax.swing.JFrame {
         initComboPhongBan();
         initComboLuong();
         this.taoMaNhanVien();
+        this.showThongTinNhanVien();
+    }
+    
+    
+    // show thong tin nhan vien
+    public void showThongTinNhanVien(){
+        if(this.daoNhanVien != null){
+            
+            try {
+                this.jLabelMaNV.setText(daoNhanVien.getMaNhanVien());
+                this.jTextFieldCMND.setText(daoNhanVien.getSoCMND());
+                this.jTextFieldHoTen.setText(daoNhanVien.getTenNhanVien());
+                this.jTextFieldQueQuan.setText(daoNhanVien.getQueQuan());
+                this.jTextFieldSDT.setText(daoNhanVien.getSoDienThoai());
+                this.jTextFieldSTK.setText(daoNhanVien.getSoTaiKhoan());
+                this.jTextPanGhiChu.setText(daoNhanVien.getGhiChu());
+                this.jTextPaneDiaChi.setText(daoNhanVien.getDiaChi());
+                
+                if(Integer.parseInt(daoNhanVien.getGioiTinh()) == 1){
+                    this.jRadioButtonNam.setSelected(true);
+                }
+                else{
+                    this.jRadioButtonu.setSelected(true);
+                }
+                
+                Calendar date = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                
+                date.setTime(sdf.parse(daoNhanVien.getNgayVaoLam()));
+                this.dateChooserComboNVL.setSelectedDate(date);
+                
+                date.setTime(sdf.parse(daoNhanVien.getNgaySinh()));
+                this.dateChooserComboNS.setSelectedDate(date);
+            } catch (Exception ex) {
+                Logger.getLogger(UIFrameThemNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }
     
     
@@ -121,7 +164,7 @@ public class UIFrameThemNhanVien extends javax.swing.JFrame {
             }
            
             if(this.daoNhanVien != null){
-                String itemPhongBan = this.daoNhanVien.getTenChucVu();
+                String itemPhongBan = this.daoNhanVien.getTenPhongBan();
                 if(!itemPhongBan.isEmpty()){
                     this.jComboBoxPhongBan.setSelectedItem(itemPhongBan);
                 }
@@ -144,7 +187,7 @@ public class UIFrameThemNhanVien extends javax.swing.JFrame {
             }
            
             if(this.daoNhanVien != null){
-                String itemLuong = this.daoNhanVien.getTenChucVu();
+                String itemLuong = this.daoNhanVien.getBacLuong();
                 if(!itemLuong.isEmpty()){
                     this.jComboBoxBacLuong.setSelectedItem(itemLuong);
                 }
@@ -442,11 +485,12 @@ layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelc)
-                .addComponent(jLabel3)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabelMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextFieldHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelc)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGap(19, 19, 19)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel15)
@@ -526,15 +570,23 @@ layout.setHorizontalGroup(
             nhanVien.setTenNhanVien(this.jTextFieldHoTen.getText());
             nhanVien.setGioiTinh(String.valueOf(this.getGioiTinh()));
 
-            
-            int status = this.bllNhanVien.insertNhanVien(nhanVien);
-            
-            if(status != 0){
-                this.dispose();
-                JOptionPane.showMessageDialog(null, "Da them thanh cong!", "Thanh Cong", JOptionPane.INFORMATION_MESSAGE);
+            if(this.daoNhanVien == null){
+                int status = this.bllNhanVien.insertNhanVien(nhanVien);
+                if(status != 0){
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công!!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
+            else{
+                int status = this.bllNhanVien.updateNhanVien(nhanVien);
+                if(status != 0){
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage()+ ex.getStackTrace(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonLuuActionPerformed
 
@@ -569,40 +621,12 @@ layout.setHorizontalGroup(
         }
         return -1;
     }
+    
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UIFrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UIFrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UIFrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UIFrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UIFrameThemNhanVien(null).setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
