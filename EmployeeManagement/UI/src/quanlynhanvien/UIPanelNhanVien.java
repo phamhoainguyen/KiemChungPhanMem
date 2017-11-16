@@ -84,6 +84,7 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
         jButtonSua = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButtonRefresh = new javax.swing.JButton();
+        jButtonXemLuong = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -208,6 +209,13 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
             }
         });
 
+        jButtonXemLuong.setText("Xem lương");
+        jButtonXemLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonXemLuongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,10 +227,12 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(41, 41, 41)
-                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                        .addComponent(jButtonXemLuong)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,7 +254,8 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jButtonXoa)
                     .addComponent(jButtonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonRefresh))
+                    .addComponent(jButtonRefresh)
+                    .addComponent(jButtonXemLuong))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE))
         );
@@ -323,6 +334,20 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
+    private void jButtonXemLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXemLuongActionPerformed
+        // TODO add your handling code here:
+        int rowNum = -1;
+        rowNum = this.jTable1.getSelectedRow();
+        if(rowNum != -1){
+            UIFrameTinhLuong xemLuong = new UIFrameTinhLuong(this.layNhanVienDaChon());
+            xemLuong.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhân viên!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButtonXemLuongActionPerformed
+
     
 
     
@@ -347,6 +372,7 @@ public class UIPanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonSua;
     private javax.swing.JButton jButtonThem;
+    private javax.swing.JButton jButtonXemLuong;
     private javax.swing.JButton jButtonXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

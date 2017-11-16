@@ -73,7 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenuTongQuan.add(jMenuItemDanhSachNhanVien);
 
-        jMenuItemTinhLuong.setText("Tính lương");
+        jMenuItemTinhLuong.setText("Xem lương");
         jMenuItemTinhLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemTinhLuongActionPerformed(evt);
@@ -137,9 +137,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItemTinhLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTinhLuongActionPerformed
         // TODO add your handling code here:
-       UIFrameTinhLuong tinhLuong = new UIFrameTinhLuong(null);
        
-       tinhLuong.setVisible(true);
     }//GEN-LAST:event_jMenuItemTinhLuongActionPerformed
 
     private void jMenuItemDanhSachNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDanhSachNhanVienActionPerformed

@@ -28,10 +28,12 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="jTextFieldSearch" min="-2" pref="334" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextFieldSearch" min="-2" pref="222" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonSearch" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace pref="83" max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <Component id="jButtonXemLuong" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonThem" min="-2" pref="71" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonXoa" min="-2" pref="72" max="-2" attributes="0"/>
@@ -58,6 +60,7 @@
                   <Component id="jButtonXoa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSua" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jButtonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonXemLuong" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="595" max="32767" attributes="0"/>
@@ -204,6 +207,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRefreshActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonXemLuong">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Xem l&#x1b0;&#x1a1;ng"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonXemLuongActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
