@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 16, 2017 lúc 06:53 AM
+-- Thời gian đã tạo: Th10 17, 2017 lúc 02:22 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 5.6.32
 
@@ -61,6 +61,34 @@ CREATE TABLE `lamviec` (
   `GHICHU` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `lamviec`
+--
+
+INSERT INTO `lamviec` (`MANHANVIEN`, `THANG`, `NAM`, `SONGAYNGHI`, `SONGAYDITRE`, `GHICHU`) VALUES
+('NV000005', 9, 2017, 2, 1, NULL),
+('NV000005', 10, 2017, 1, 1, NULL),
+('NV000005', 8, 2017, 0, 1, NULL),
+('NV000005', 7, 2017, 3, 0, NULL),
+('NV000006', 8, 2017, 0, 1, NULL),
+('NV000006', 7, 2017, 1, 0, NULL),
+('NV000006', 9, 2017, 0, 0, NULL),
+('NV000006', 10, 2017, 1, 0, NULL),
+('NV000006', 6, 2017, 0, 1, NULL),
+('NV000006', 5, 2017, 0, 2, NULL),
+('NV000007', 8, 2017, 0, 1, NULL),
+('NV000007', 7, 2017, 1, 0, NULL),
+('NV000007', 9, 2017, 0, 0, NULL),
+('NV000007', 10, 2017, 1, 0, NULL),
+('NV000007', 6, 2017, 0, 1, NULL),
+('NV000007', 5, 2017, 0, 2, NULL),
+('NV000008', 8, 2017, 0, 1, NULL),
+('NV000008', 7, 2017, 1, 0, NULL),
+('NV000008', 9, 2017, 0, 0, NULL),
+('NV000008', 10, 2017, 1, 0, NULL),
+('NV000008', 6, 2017, 0, 1, NULL),
+('NV000008', 5, 2017, 0, 2, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -115,7 +143,7 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`MANHANVIEN`, `HOTEN`, `GIOITINH`, `NGAYSINH`, `CMND`, `DIACHI`, `QUEQUAN`, `SOTAIKHOAN`, `SODIENTHOAI`, `NGAYVAOLAM`, `ISDELETE`, `GHICHU`, `MAPHONGBAN`, `MACHUCVU`, `BACLUONG`) VALUES
 ('NV000005', 'Nguyên Phạm Hoài', 1, '17/10/1996', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV002', 4),
-('NV000006', 'Nguyen Van Tai', 1, '15/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '15/11/2017', 0, '', 'PB002', 'CV006', 2),
+('NV000006', 'Nguyen Van Tai 1', 0, '30/10/2017', '221420525', '??a ch? ', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '06/11/2017', 0, 'Ghi chú', 'PB001', 'CV003', 2),
 ('NV000007', 'Nguyen Van B', 1, '16/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '16/11/2017', 0, '', 'PB002', 'CV001', 3),
 ('NV000008', 'Tran Van C', 0, '16/11/2017', '221420525', '', 'Bình D??ng', '2211 3456 44562', '0988588xxx', '16/11/2017', 0, '', 'PB005', 'CV007', 2);
 
